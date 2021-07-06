@@ -8,13 +8,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-
-func dataSourceTest() *schema.Resource{
-	return  &schema.Resource {
+func dataSourceTest() *schema.Resource {
+	return &schema.Resource{
 		ReadContext: dataSourceOrderRead,
 		Schema: map[string]*schema.Schema{
 			"id": &schema.Schema{
-				Type: schema.TypeInt,
+				Type:     schema.TypeInt,
 				Required: true,
 			},
 			/*"items": &schema.Schema{
@@ -29,8 +28,8 @@ func dataSourceTest() *schema.Resource{
 					},
 				},
 			},*/
-			"desc" : &schema.Schema{ 
-				Type : schema.TypeString,
+			"desc": &schema.Schema{
+				Type:     schema.TypeString,
 				Computed: true,
 			},
 		},
@@ -50,7 +49,6 @@ func dataSourceOrderRead(ctx context.Context, d *schema.ResourceData, m interfac
 	//	return diag.FromErr(err)
 	//}
 
-	d.SetId( orderID )
-	return  diags
+	d.SetId(orderID)
+	return diags
 }
-

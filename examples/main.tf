@@ -7,11 +7,14 @@ terraform {
   }
 }
 
-provider velocloud {
+provider "velocloud" {
+  vco      = var.vco
+  username = var.username
+  password = var.password
   //username = "aaabbb"
 }
 
-data velocloud_order "aaa"{
+data "velocloud_order" "aaa" {
   id = 1
 }
 
