@@ -22,18 +22,23 @@ func Provider() *schema.Provider {
 			"username": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("HASHICUPS_USERNAME", nil),
+				DefaultFunc: schema.EnvDefaultFunc("VCO_USER", nil),
 			},
 			"password": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
 				Sensitive:   true,
-				DefaultFunc: schema.EnvDefaultFunc("HASHICUPS_PASSWORD", nil),
+				DefaultFunc: schema.EnvDefaultFunc("VCO_PASS", nil),
 			},
 			"vco": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("VCO_URL", nil),
+				DefaultFunc: schema.EnvDefaultFunc("VCO_HOST", nil),
+			},
+			"apikey": &schema.Schema{
+				Type:        schema.TypeString,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("VCO_KEY", nil),
 			},
 		},
 
@@ -41,9 +46,8 @@ func Provider() *schema.Provider {
 			//"hashicups_order": resourceOrder(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			//"hashicups_coffees": dataSourceCoffees(),
-			//"hashicups_order":   dataSourceOrder(),
 			"velocloud_order": dataSourceTest(),
+			"velocloud_edge":  dataSourceVeloEdge(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
@@ -53,31 +57,37 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	vco := d.Get("vco").(string)
 	username := d.Get("username").(string)
 	password := d.Get("password").(string)
+	apikey := d.Get("apikey").(string)
 
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 	c := vcoclient.NewAPIClient(&vcoclient.Configuration{
-		UserAgent: "Swagger-Codegen/1.0.0/go",
-		BasePath: vco,
+		UserAgent:     "Terraform velocloud Agent/1.0.0/go",
+		BasePath:      "https://" + vco + "/portal/",
 		DefaultHeader: make(map[string]string),
+		Idcount:       0,
 	})
 
 	log.Println("[DEBUG] ============================")
-	auth := &vcoclient.AuthObject{
-		Username: username,
-		Password: password,
-	}
-	e, err := c.LoginApi.LoginEnterpriseLogin(nil,  *auth)
-	log.Println(&auth)
-	log.Printf("%#v", auth)
-	log.Printf("%#v", e)
-	log.Printf("%#v", err)
 
-	//log.Printf("%#v",c.LoginApi.LoginEnterpriseLogin(nil,nil))
-	//log.Printf("%#v",e)
+	if (apikey != "") && (username == "") && (password == "") && (vco != "") {
+		c.AddHeader("Authorization", "Token "+apikey)
+	}
+
+	if (username != "") && (password != "") && (vco != "") && (apikey == "") {
+		auth := &vcoclient.AuthObject{
+			Username: username,
+			Password: password,
+		}
+		_, err := c.LoginApi.LoginEnterpriseLogin(nil, *auth)
+		if err != nil {
+			return nil, diag.FromErr(err)
+		}
+		return c, diags
+	}
 	log.Println("[DEBUG] ============================")
 	//log.Fatal(c.LoginApi)
-	
+
 	// diags = append(diags, diag.Diagnostic{
 	//      Severity: diag.Warning,
 	//      Summary:  "Warning Message Summary",
@@ -109,5 +119,5 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	//}
 
 	//return c, diags
-	return c, diags
+	return nil, diag.Errorf("Missing credentials")
 }

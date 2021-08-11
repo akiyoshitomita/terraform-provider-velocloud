@@ -14,10 +14,10 @@ provider "velocloud" {
   //username = "aaabbb"
 }
 
-data "velocloud_order" "aaa" {
-  id = 1
+data "velocloud_edge" "aaa" {
+  name = "tomita_home"
 }
 
 output "a" {
-  value = data.velocloud_order.aaa
+  value = data.velocloud_edge.aaa
 }
