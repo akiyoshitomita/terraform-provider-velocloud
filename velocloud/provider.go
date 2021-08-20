@@ -46,7 +46,6 @@ func Provider() *schema.Provider {
 			//"hashicups_order": resourceOrder(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"velocloud_order": dataSourceTest(),
 			"velocloud_edge":  dataSourceVeloEdge(),
 		},
 		ConfigureContextFunc: providerConfigure,
@@ -68,13 +67,12 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 		Idcount:       0,
 	})
 
-	log.Println("[DEBUG] ============================")
-
 	if (apikey != "") && (username == "") && (password == "") && (vco != "") {
 		c.AddHeader("Authorization", "Token "+apikey)
 	}
 
 	if (username != "") && (password != "") && (vco != "") && (apikey == "") {
+		log.Println("username authentication")
 		auth := &vcoclient.AuthObject{
 			Username: username,
 			Password: password,
@@ -85,7 +83,6 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 		}
 		return c, diags
 	}
-	log.Println("[DEBUG] ============================")
 	//log.Fatal(c.LoginApi)
 
 	// diags = append(diags, diag.Diagnostic{

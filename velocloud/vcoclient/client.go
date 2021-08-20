@@ -10,10 +10,10 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/http/cookiejar"
 	"strings"
-	"errors"
 	//"fmt"
 	"log"
 )
@@ -54,7 +54,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err error) {
 	if strings.Contains(contentType, "application/json") {
-		log.Printf("%s",b)
+		log.Printf("%s", b)
 		log.Println("####### AAA #######")
 		if err = json.Unmarshal(b, v); err != nil {
 			log.Println("####### AAA #######")
@@ -79,10 +79,10 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 // prepareRequest build the request
 func (c *APIClient) prepareRequest(
 	ctx context.Context,
+	path string,
 	method string,
 	postBody interface{},
 	headerParams map[string]string) (localVarRequest *http.Request, err error) {
-
 
 	var body *bytes.Buffer
 	body = &bytes.Buffer{}
@@ -92,8 +92,10 @@ func (c *APIClient) prepareRequest(
 		return nil, err
 	}
 
-	//log.Println(c.cfg.HTTPClient.Jar)
-	localVarRequest, err = http.NewRequest(method, c.cfg.BasePath, body)
+	var url string
+	url = c.cfg.BasePath + "rest" + path
+
+	localVarRequest, err = http.NewRequest(method, url, body)
 
 	if len(headerParams) > 0 {
 		headers := http.Header{}

@@ -13,9 +13,9 @@ type JsonRpcRequest struct {
 	Id      int         `json:"id"`
 }
 
-type JsonRpcResponse struct{
-	Jsonrpc		string		`json:"jsonrpc"`
-	Meta		interface{}	`json:"meta"`
-	Result		interface{}	`json:"result"`
-	Id		int		`json:"id"`
+type JsonRpcResponse struct {
+	Jsonrpc string      `json:"jsonrpc"`
+	Meta    interface{} `json:"meta"`
+	Result  interface{} `json:"result"`
+	Id      int         `json:"id"`
 }
