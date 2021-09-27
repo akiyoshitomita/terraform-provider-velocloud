@@ -76,7 +76,7 @@ type APIClient struct {
 	//
 	//	LinkQualityEventApi *LinkQualityEventApiService
 	//
-		LoginApi *LoginApiService
+	LoginApi *LoginApiService
 	//
 	//	MetricsApi *MetricsApiService
 	//
@@ -131,7 +131,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	//	c.ApiTokenApi = (*ApiTokenApiService)(&c.common)
 	//	c.ClientDeviceApi = (*ClientDeviceApiService)(&c.common)
 	//	c.CompositeRoleApi = (*CompositeRoleApiService)(&c.common)
-//		c.ConfigurationApi = (*ConfigurationApiService)(&c.common)
+	//		c.ConfigurationApi = (*ConfigurationApiService)(&c.common)
 	//	c.CreateApi = (*CreateApiService)(&c.common)
 	//	c.DeleteApi = (*DeleteApiService)(&c.common)
 	//	c.DisasterRecoveryApi = (*DisasterRecoveryApiService)(&c.common)
@@ -144,7 +144,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	//	c.GatewayApi = (*GatewayApiService)(&c.common)
 	//	c.GetApi = (*GetApiService)(&c.common)
 	//	c.LinkQualityEventApi = (*LinkQualityEventApiService)(&c.common)
-		c.LoginApi = (*LoginApiService)(&c.common)
+	c.LoginApi = (*LoginApiService)(&c.common)
 	//	c.MetricsApi = (*MetricsApiService)(&c.common)
 	//	c.MonitoringApi = (*MonitoringApiService)(&c.common)
 	//	c.MspApi = (*MspApiService)(&c.common)

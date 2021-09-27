@@ -25,6 +25,7 @@ type APIClient struct {
 	// API Serives
 	LoginApi      *LoginApiService
 	EnterpriseApi *EnterpriseApiService
+	EdgeApi       *EdgeApiService
 }
 
 type service struct {
@@ -48,16 +49,17 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.LoginApi = (*LoginApiService)(&c.common)
 	c.EnterpriseApi = (*EnterpriseApiService)(&c.common)
+	c.EdgeApi = (*EdgeApiService)(&c.common)
 
 	return c
 }
 
 func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err error) {
 	if strings.Contains(contentType, "application/json") {
-		log.Printf("%s", b)
-		log.Println("####### AAA #######")
+		//log.Printf("%s", b)
+		//log.Println("####### AAA #######")
 		if err = json.Unmarshal(b, v); err != nil {
-			log.Println("####### AAA #######")
+			//log.Println("####### AAA #######")
 			log.Println(err)
 			return err
 		}

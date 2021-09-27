@@ -22,96 +22,119 @@ func dataSourceVeloEdge() *schema.Resource {
 		ReadContext: dataSourceVeloEdgeRead,
 		Schema: map[string]*schema.Schema{
 			"name": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "edge name",
 			},
-			"id": &schema.Schema{
-				Type:     schema.TypeInt,
-				Computed: true,
+			"edge_id": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "edge id",
 			},
 			"activation_key": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "activation key",
 			},
 			"build_number": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "software build number",
 			},
 			"custom_info": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "custom info",
 			},
 			"description": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "description",
 			},
 			"device_family": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "device family",
 			},
 			"device_id": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "device id",
 			},
 			"edge_state": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "edge state",
 			},
 			"endpoint_pki_mode": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "endpoint_pki_mode",
 			},
 			"enterprise_id": &schema.Schema{
-				Type:     schema.TypeInt,
-				Computed: true,
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "enterprise_id",
 			},
 			"factory_software_version": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "factory software version",
 			},
 			"factory_build_number": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "factory software build number",
 			},
 			"ha_previous_state": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "ha_previous_state",
 			},
 			"ha_serial_number": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "serial number of HA secundry device",
 			},
 			"ha_state": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "HA status",
 			},
 			"model_number": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "model number",
 			},
 			"self_mac_address": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "mac address of device",
 			},
 			"serial_number": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "serial number of device",
 			},
 			"site_id": &schema.Schema{
-				Type:     schema.TypeInt,
-				Computed: true,
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "site id of edge",
 			},
 			"software_version": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "software version ",
 			},
 			"is_hub": &schema.Schema{
-				Type:     schema.TypeBool,
-				Computed: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Description: "true is configurated hub",
 			},
 			"is_software_version_supported_by_vco": &schema.Schema{
-				Type:     schema.TypeBool,
-				Computed: true,
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Description: "If true, the device is using supoerted software version ",
 			},
 		},
 	}
@@ -144,7 +167,7 @@ func dataSourceVeloEdgeRead(ctx context.Context, d *schema.ResourceData, m inter
 		return diag.Errorf("Not Found Edge[" + name + "]")
 	}
 
-	d.Set("id", edge.Id)
+	d.Set("edge_id", edge.Id)
 	d.Set("activation_key", edge.ActivationKey)
 	d.Set("build_number", edge.BuildNumber)
 	d.Set("custom_info", edge.CustomInfo)
