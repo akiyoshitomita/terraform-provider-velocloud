@@ -25,7 +25,7 @@ func resourceVeloEdge() *schema.Resource {
 		DeleteContext: resourceVeloEdgeDelete,
 		SchemaVersion: 0,
 		Schema: map[string]*schema.Schema{
-			"configuration_id": {
+			"profile_id": {
 				Type:        schema.TypeInt,
 				Required:    true,
 				Description: "Profile id",
@@ -310,7 +310,7 @@ func resourceVeloEdgeCreate(ctx context.Context, d *schema.ResourceData, m inter
 	// siteの内容を入れる
 
 	post := &vcoclient.EdgeEdgeProvision{
-		ConfigurationId: d.Get("configuration_id").(int),
+		ConfigurationId: d.Get("profile_id").(int),
 		Name:            d.Get("name").(string),
 		ModelNumber:     d.Get("model_number").(string),
 		Site: &vcoclient.Site{
@@ -380,7 +380,7 @@ func resourceVeloEdgeRead(ctx context.Context, d *schema.ResourceData, m interfa
 	if err != nil {
 		return diag.FromErr(err)
 	}
-	d.Set("configuration_id", res.Configuration.Id)
+	d.Set("profile_id", res.Configuration.Id)
 	d.Set("name", res.Name)
 	d.Set("serial_number", res.SerialNumber)
 	d.Set("model_number", res.ModelNumber)
