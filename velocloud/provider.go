@@ -45,7 +45,8 @@ func Provider() *schema.Provider {
 			"velocloud_edge": resourceVeloEdge(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"velocloud_edge": dataSourceVeloEdge(),
+			"velocloud_edge":         dataSourceVeloEdge(),
+			"velocloud_license_list": dataSourceVeloLicenseList(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
