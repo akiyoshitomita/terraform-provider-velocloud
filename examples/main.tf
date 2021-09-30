@@ -13,9 +13,10 @@ provider "velocloud" {
   password = var.password
 }
 
-data "velocloud_edge" "edge0" {
-  name = "tomita_home"
-}
+
+#data "velocloud_edge" "edge0" {
+#  name = "tomita_home"
+#}
 
 data "velocloud_license_list" "license" {
   edition        = "PREMIUM"
@@ -24,13 +25,18 @@ data "velocloud_license_list" "license" {
   bandwidth_tier = "001GW"
 }
 
-data "velocloud_profile" "profile" {
-  name = "tomita_test2"
+#data "velocloud_profile" "profile" {
+#  name = "tomita_test2"
+#}
+
+resource "velocloud_profile" "profile1" {
+  name        = "tomtia_profile1"
+  description = "this is description 2"
 }
 
 resource "velocloud_edge" "edge1" {
   name            = "tomita1"
-  profile_id      = data.velocloud_profile.profile.profile_id
+  profile_id      = velocloud_profile.profile1.id
   model_number    = "virtual"
   edge_license_id = data.velocloud_license_list.license.licenses[0].license_id
   custom_info     = "abc"
@@ -38,6 +44,7 @@ resource "velocloud_edge" "edge1" {
     name = "test2"
   }
 }
+
 
 #output "test1" {
 #  value = velocloud_edge.edge1

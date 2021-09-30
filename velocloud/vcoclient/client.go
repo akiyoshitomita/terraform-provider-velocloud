@@ -23,10 +23,11 @@ type APIClient struct {
 	common service
 
 	// API Serives
-	LoginApi      *LoginApiService
-	EnterpriseApi *EnterpriseApiService
-	EdgeApi       *EdgeApiService
-	LicenseApi    *LicenseApiService
+	LoginApi         *LoginApiService
+	EnterpriseApi    *EnterpriseApiService
+	EdgeApi          *EdgeApiService
+	LicenseApi       *LicenseApiService
+	ConfigurationApi *ConfigurationApiService
 }
 
 type service struct {
@@ -52,6 +53,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.EnterpriseApi = (*EnterpriseApiService)(&c.common)
 	c.EdgeApi = (*EdgeApiService)(&c.common)
 	c.LicenseApi = (*LicenseApiService)(&c.common)
+	c.ConfigurationApi = (*ConfigurationApiService)(&c.common)
 
 	return c
 }
