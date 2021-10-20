@@ -42,8 +42,9 @@ func Provider() *schema.Provider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"velocloud_edge":    resourceVeloEdge(),
-			"velocloud_profile": resourceVeloProfile(),
+			"velocloud_edge":     resourceVeloEdge(),
+			"velocloud_profile":  resourceVeloProfile(),
+			"velocloud_firewall": resourceVeloFirewall(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"velocloud_edge":         dataSourceVeloEdge(),

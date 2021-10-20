@@ -1,13 +1,13 @@
 package vcoclient
 
-//import (
-//	"time"
-//)
+import (
+	"time"
+)
 
-type ConfigurationModule struct {
-	Created         string      `json:"created,omitempty"`
-	Effective       string      `json:"effective,omitempty"`
-	Modified        string      `json:"modified,omitempty"`
+type ConfigurationGetConfigurationModulesResultItem struct {
+	Created         time.Time   `json:"created,omitempty"`
+	Effective       time.Time   `json:"effective,omitempty"`
+	Modified        time.Time   `json:"modified,omitempty"`
 	Id              int32       `json:"id,omitempty"`
 	Name            string      `json:"name"`
 	Type_           string      `json:"type,omitempty"`
