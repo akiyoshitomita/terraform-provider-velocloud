@@ -1,14 +1,15 @@
 package vcoclient
 
 type ModelFirewallInboundRuleAction struct {
-	Type           string                           `json:"type,omitempty"`
-	Nat            ModeFirewallInboundRuleActionNat `json:"nat,omitempty"`
-	Interface      string                           `json:"interface,omitempty"`
-	SubinterfaceId int                              `json:"subinterfaceId,omitempty"`
+	Type           string                            `json:"type,omitempty"`
+	Nat            ModelFirewallInboundRuleActionNat `json:"nat,omitempty"`
+	Interface      string                            `json:"interface,omitempty"`
+	SubinterfaceId int32                             `json:"subinterfaceId,omitempty"`
+	SegmentId      int32                             `json:"segmentId"`
 }
 
-type ModeFirewallInboundRuleActionNat struct {
+type ModelFirewallInboundRuleActionNat struct {
 	LanIp    string `json:"lan_ip,omitempty"`
 	LanPort  int    `json:"lan_port,omitempty"`
-	OutBound bool   `json:"outbound,omitempty"`
+	Outbound bool   `json:"outbound,omitempty"`
 }

@@ -53,23 +53,68 @@ resource "velocloud_firewall" "edge_firewall" {
   statefull_firewall_enabled                = true
 
   segments {
-    name               = "Global Segment"
+    #name               = "Global Segment"
     #segment_logical_id = "2d36fc49-701d-4da8-9eb1-c32b5b82f7b7"
+    segment_id = 0
     firewall_rule {
-      #action = "allow"
-      source_type = "vlan"
-      source_vlan = 1
+      source_type      = "vlan"
+      source_vlan      = 1
       destination_type = "any"
-      name        = "test2"
-      source_mac  = "aa:bb:cc:dd:ee:ff"
-      source_port = "80-82"
-      logging = true 
+      name             = "test2"
+      source_port      = "80-82"
+      logging          = true
+    }
+    firewall_rule {
+      source_type      = "vlan"
+      source_vlan      = 1
+      destination_type = "any"
+      name             = "test3"
+      source_port      = "80-82"
+      logging          = true
     }
   }
-#  segments {
-#    name               = "test"
-#    segment_logical_id = "683e5aed-dc0b-47e4-bf66-ec7842e37dee"
-#  }
+  port_forwarding_rule {
+    name       = "rule1"
+    protocol   = "tcp"
+    interface  = "GE2"
+    outside_ip = "192.168.1.100"
+    wan_ports  = "80-443"
+    lan_ip     = "192.168.2.100"
+    lan_port   = 80
+    segment_id = 0
+  }
+
+  nat_rule {
+    name             = "nat1"
+    outbound_ip      = "1.1.1.1"
+    interface        = "GE2"
+    inside_ip        = "192.168.1.100"
+    segment_id       = 0
+    outbound_traffic = true
+    allow_protocol   = "all"
+
+  }
+
+  stateful_firewall {
+    edge_overwrite              = true
+    establieshd_tcp_timeout     = 7200
+    non_established_tcp_timeout = 300
+    udp_timeout                 = 300
+    other_timeout               = 60
+  }
+  network_flood_protection{
+    #edge_overwrite = true
+    #new_connection_threshold = 25
+  }
+
+  edge_access{
+    edge_overwrite = true
+    ssh = true
+    ssh_allow = ["1.1.1.1"]
+    webui = true
+    webui_allow = ["1.1.1.1"]
+  }
+
 }
 
 #output "test1" {

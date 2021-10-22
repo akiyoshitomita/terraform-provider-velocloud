@@ -411,7 +411,7 @@ func resourceVeloEdgeRead(ctx context.Context, d *schema.ResourceData, m interfa
 	site_map["shipping_state"] = res.Site.ShippingState
 	site_map["shipping_country"] = res.Site.ShippingCountry
 	site_map["shipping_postal_code"] = res.Site.ShippingPostalCode
-	d.Set("site", site_map)
+	d.Set("site", []interface{}{site_map})
 
 	if res.HaState == "UNCONFIGURED" {
 		d.Set("ha_enabled", false)

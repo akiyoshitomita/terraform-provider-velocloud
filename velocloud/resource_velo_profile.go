@@ -51,7 +51,7 @@ func resourceVeloProfile() *schema.Resource {
 				Description: "profile type",
 			},
 			"bastion_state": &schema.Schema{
-				Type:        schema.TypeInt,
+				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Bastion state",
 			},
