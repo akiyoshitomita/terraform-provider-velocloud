@@ -47,8 +47,10 @@ func Provider() *schema.Provider {
 			"velocloud_firewall": resourceVeloFirewall(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
+			"velocloud_address_gruop":      dataSourceVeloAddressGroup(),
 			"velocloud_edge":         dataSourceVeloEdge(),
 			"velocloud_license_list": dataSourceVeloLicenseList(),
+			"velocloud_port_gruop":      dataSourceVeloPortGroup(),
 			"velocloud_profile":      dataSourceVeloProfile(),
 		},
 		ConfigureContextFunc: providerConfigure,

@@ -29,6 +29,10 @@ data "velocloud_license_list" "license" {
 #  name = "tomita_test2"
 #}
 
+data "velocloud_address_gruop" "addgrup1"{
+  name = "tomita_test1"
+}
+
 resource "velocloud_profile" "profile1" {
   name        = "tomtia_profile1"
   description = "this is description 2"
