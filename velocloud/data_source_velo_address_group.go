@@ -55,7 +55,7 @@ func dataSourceVeloAddressGroupRead(ctx context.Context, d *schema.ResourceData,
 		return diag.FromErr(err)
 	}
 
-	for _, v := range res{
+	for _, v := range res {
 		if v.Name == name {
 			d.Set("adderss_group_id", v.Id)
 			d.Set("logical_id", v.LogicalId)

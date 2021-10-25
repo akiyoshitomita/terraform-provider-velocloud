@@ -25,12 +25,12 @@ func dataSourceVeloPortGroup() *schema.Resource {
 			"name": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
-				Description: "address group name",
+				Description: "port group name",
 			},
 			"port_group_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "address group id",
+				Description: "port group id",
 			},
 			"logical_id": &schema.Schema{
 				Type:        schema.TypeString,
@@ -55,7 +55,7 @@ func dataSourceVeloPortGroupRead(ctx context.Context, d *schema.ResourceData, m 
 		return diag.FromErr(err)
 	}
 
-	for _, v := range res{
+	for _, v := range res {
 		if v.Name == name {
 			d.Set("port_group_id", v.Id)
 			d.Set("logical_id", v.LogicalId)
@@ -63,5 +63,5 @@ func dataSourceVeloPortGroupRead(ctx context.Context, d *schema.ResourceData, m 
 		}
 	}
 
-	return diag.Errorf("not found address group [%s]", name)
+	return diag.Errorf("not found port group [%s]", name)
 }

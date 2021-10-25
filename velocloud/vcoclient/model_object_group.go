@@ -21,14 +21,14 @@ type ObjectGroup struct {
 	AlertsEnabled         *Tinyint          `json:"alertsEnabled"`
 	OperatorAlertsEnabled *Tinyint          `json:"operatorAlertsEnabled"`
 	Status                string            `json:"status"`
-	StatusModified        string         `json:"statusModified"`
+	StatusModified        string            `json:"statusModified"`
 	PreviousData          interface{}       `json:"previousData"`
-	PreviousCreated       string         `json:"previousCreated"`
+	PreviousCreated       string            `json:"previousCreated"`
 	DraftData             string            `json:"draftData"`
-	DraftCreated          string         `json:"draftCreated"`
+	DraftCreated          string            `json:"draftCreated"`
 	DraftComment          string            `json:"draftComment"`
 	Data                  []ObjectGroupData `json:"data"`
-	LastContact           string         `json:"lastContact"`
+	LastContact           string            `json:"lastContact"`
 	Version               string            `json:"version"`
 	Modified              time.Time         `json:"modified"`
 }

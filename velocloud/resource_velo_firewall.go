@@ -970,7 +970,7 @@ func resourceVeloFirewallUpdate(ctx context.Context, d *schema.ResourceData, m i
 		firewallData.Segments = firewallData.Segments[:newlen]
 	}
 	for s := 0; s < len(firewallData.Segments); s++ {
-		//　グメントのアップデート
+		//　セグメントのアップデート
 		if firewallData.Segments[s].Segment.SegmentId != int32(d.Get(fmt.Sprintf("segments.%d.segment_id", s)).(int)) {
 			post3 := &vcoclient.EnterpriseGetEnterpriseNetworkSegments{}
 			segs, _, err := m.(*vcoclient.APIClient).EnterpriseApi.EnterpriseGetEnterpriseNetworkSegments(nil, *post3)
