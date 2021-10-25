@@ -117,6 +117,7 @@ resource "velocloud_firewall" "edge_firewall" {
     ssh_allow = ["1.1.1.1"]
     webui = true
     webui_allow = ["1.1.1.1"]
+    usb = true
   }
 
 }

@@ -1371,7 +1371,7 @@ func resourceVeloFirewallUpdate(ctx context.Context, d *schema.ResourceData, m i
 				firewallData.Services.Ssh.AllowSelectedIp = append(firewallData.Services.Ssh.AllowSelectedIp, v.(string))
 			}
 			firewallData.Services.Console.Enabled = d.Get("edge_access.0.console").(bool)
-			firewallData.Services.UsbDisabled = d.Get("edge_access.0.usb").(bool)
+			firewallData.Services.UsbDisabled = !d.Get("edge_access.0.usb").(bool)
 			firewallData.Services.Snmp.Enabled = d.Get("edge_access.0.snmp").(bool)
 			for _, v := range d.Get("edge_access.0.snmp_allow").([]interface{}) {
 				firewallData.Services.Snmp.AllowSelectedIp = append(firewallData.Services.Snmp.AllowSelectedIp, v.(string))

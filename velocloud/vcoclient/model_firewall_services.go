@@ -6,7 +6,7 @@ type FirewallServices struct {
 	Console     FirewallServiceConsole `json:"console,omitempty"`
 	Snmp        FirewallServiceSnmp    `json:"snmp,omitempty"`
 	Icmp        FirewallServiceIcmp    `json:icmp,omitempty"`
-	UsbDisabled bool                   `json:"usb.disabled,omitempty"`
+	UsbDisabled bool                   `json:"usb.disabled"`
 }
 
 type FirewallServiceSsh struct {
